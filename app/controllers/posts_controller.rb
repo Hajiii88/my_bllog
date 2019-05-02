@@ -6,9 +6,14 @@ class PostsController < ApplicationController
   end
 
   def new
+    @post = Post.new
   end
 
   def create
+    
+    @post = Post.new(post_prams)
+    @post.save
+    redirect_to @post
   end
 
   def edit
@@ -18,5 +23,9 @@ class PostsController < ApplicationController
   end
 
   def destroy
+  end
+private
+  def post_prams
+    params.require(:post).permit(:tytle,:body,:category)
   end
 end
