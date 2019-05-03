@@ -14,7 +14,7 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new
+    @post = Post.find_newest_article
   end
 
   def create
