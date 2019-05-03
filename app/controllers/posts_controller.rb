@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find (params[:id])
+    set_post
   end
 
   def new
@@ -15,28 +15,31 @@ class PostsController < ApplicationController
 
   def create
     
-    @post = Post.new(post_prams)
+    @post = Post.new(post_params)
     @post.save
     redirect_to @post
   end
 
   def edit
-    @post = Post.find(params[:id])
+    set_post
   end
 
   def update
-    @post = Post.find(params[:id])
+    set_post
     @post.update
     redirect_to @post
   end
 
   def destroy
-    @post = Post.find(params[:id])
+    set_post
     @post.destroy
     redirect_to @post
   end
 private
-  def post_prams
+  def post_params
     params.require(:post).permit(:title,:body,:category)
+  end
+  def set_post
+    @post = Post.find(params[:id])
   end
 end
